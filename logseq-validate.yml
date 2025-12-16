@@ -1,0 +1,23 @@
+name: Logseq Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate-graph:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Logseq CLI
+        run: npm install -g @logseq/cli
+
+      - name: Validate Logseq graph
+        run: logseq validate -g db.sqlite
