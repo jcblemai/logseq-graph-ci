@@ -14,10 +14,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22.17.0"
 
-      - name: Install Logseq CLI
+      - name: Install Logseq CLI (database mode)
+        env:
+          LOGSEQ_DATABASE: "1"
         run: npm install -g @logseq/cli
 
       - name: Validate Logseq graph
+        env:
+          LOGSEQ_DATABASE: "1"
         run: logseq validate -g db.sqlite
