@@ -1,8 +1,9 @@
-name: Logseq Validate
+name: Logseq Validate Graph
 
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   validate-graph:
@@ -10,18 +11,17 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22.17.0"
+          node-version: "24"
 
-      - name: Install Logseq CLI (database mode)
-        env:
-          LOGSEQ_DATABASE: "1"
+      - name: Install Logseq CLI
         run: npm install -g @logseq/cli
 
       - name: Validate Logseq graph
-        env:
-          LOGSEQ_DATABASE: "1"
         run: logseq validate -g db.sqlite
+
