@@ -44,5 +44,7 @@ jobs:
       - name: Validate and compare page/block counts
         run: scripts/check-graph-counts.sh db.sqlite
         env:
+          # Use the previous pushed commit (or PR base) so we compare across CI runs, not just the last commit.
+          BASE_COMMIT: ${{ github.event.pull_request.base.sha || github.event.before || 'HEAD^' }}
           PAGE_DROP_THRESHOLD: 3
           BLOCK_DROP_THRESHOLD: 3
