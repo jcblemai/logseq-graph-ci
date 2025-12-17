@@ -25,3 +25,24 @@ jobs:
       - name: Validate Logseq graph
         run: logseq validate -g db.sqlite
 
+  compare-graph-counts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository with history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install Logseq CLI
+        run: npm install -g @logseq/cli
+
+      - name: Validate and compare page/block counts
+        run: scripts/check-graph-counts.sh db.sqlite
+        env:
+          PAGE_DROP_THRESHOLD: 3
+          BLOCK_DROP_THRESHOLD: 3
