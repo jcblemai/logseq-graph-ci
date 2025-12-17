@@ -1,11 +1,11 @@
 # logseq-graph-ci
-CI for logseq-db graph. Contributions welcome—hastily put together but works and tries to avoid accidental data loss.
+CI for logseq-db graph. Contributions welcome... Hastily put together but works.
 
-Currently this does two checks:
-* check that the graph validate (i.e that all the graph is correct) using the logseq CLI command.
-* check that no more than three (3) (configurable) pages or blocks are removed between this commit and the last one, to prevent accidental deletion. This works but is not ideal, see [1].
+Currently this does two verifications:
+* check that the graph is valid using the logseq CLI command. Prevent introducing broken nodes.
+* check that no more than three (3) (configurable) pages or blocks are removed between this commit and the last one this action was run on, to prevent accidental deletion. This works but is not ideal, see [1].
 
-The deletion guard runs `logseq validate` twice—once on this commit and once on the commit where CI last ran—and compares the page/block counts. The default threshold is 3 removals (`PAGE_DROP_THRESHOLD`/`BLOCK_DROP_THRESHOLD` envs). If the base graph file is missing, or the base commit cannot be found, the comparison is skipped. Net new pages/blocks can hide deletions, so this is only a stopgap until someone can build the better nbb-based approach.
+The deletion guard runs `logseq validate` twice (once on this commit and once on the commit where CI last ran) and compares the page/block counts. The default threshold is 3 removals (`PAGE_DROP_THRESHOLD`/`BLOCK_DROP_THRESHOLD` envs). If the base graph file is missing, or the base commit cannot be found, the comparison is skipped. Net new pages/blocks can hide deletions, so this is only a stopgap until someone can build the better nbb-based approach.
 
 If you never run CI, it means that you'll see little check-marks after all your pushes to github. Like this:
 
