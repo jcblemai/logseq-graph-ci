@@ -9,9 +9,12 @@ If you never run CI, it means that you'll see little check-marks after all your 
 
 <img width="950" height="623" alt="Screenshot 2025-12-17 at 11 34 37 AM" src="https://github.com/user-attachments/assets/a1b0023e-c07d-410c-9364-2aca4032c68f" />
 and you can configure notifications.
-## How to use
+
+
+## How to use 
 Take the yml file and put it into your graph github repository, inside folder `.github/workflows/`. If you want you may also take the script folder with it to do the check of graph deletion
 
+## Footnotes
 [1] logseq dev cldwalker proposed something using nbb-logseq script
 
 > > me: Also is there a command to count datoms and pages without running the full validate ?
